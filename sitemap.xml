@@ -2,87 +2,87 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://guide.disnake.dev/</loc>
-         <lastmod>2021-11-21</lastmod>
+         <lastmod>2021-11-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://guide.disnake.dev/links-credits/</loc>
-         <lastmod>2021-11-21</lastmod>
+         <lastmod>2021-11-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://guide.disnake.dev/migrating-from-dpy/</loc>
-         <lastmod>2021-11-21</lastmod>
+         <lastmod>2021-11-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://guide.disnake.dev/000-prerequisites/001-installing-python/</loc>
-         <lastmod>2021-11-21</lastmod>
+         <lastmod>2021-11-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://guide.disnake.dev/000-prerequisites/002-creating-your-application/</loc>
-         <lastmod>2021-11-21</lastmod>
+         <lastmod>2021-11-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://guide.disnake.dev/000-prerequisites/003-inviting-your-bot/</loc>
-         <lastmod>2021-11-21</lastmod>
+         <lastmod>2021-11-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://guide.disnake.dev/100-getting-started/101-initial-files/</loc>
-         <lastmod>2021-11-21</lastmod>
+         <lastmod>2021-11-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://guide.disnake.dev/100-getting-started/102-creating-commands/</loc>
-         <lastmod>2021-11-21</lastmod>
+         <lastmod>2021-11-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://guide.disnake.dev/100-getting-started/103-command-handling/</loc>
-         <lastmod>2021-11-21</lastmod>
+         <lastmod>2021-11-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://guide.disnake.dev/100-getting-started/104-event-handling/</loc>
-         <lastmod>2021-11-21</lastmod>
+         <lastmod>2021-11-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://guide.disnake.dev/200-interactions/201-interactions/</loc>
-         <lastmod>2021-11-21</lastmod>
+         <lastmod>2021-11-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://guide.disnake.dev/200-interactions/202-slash-commands/</loc>
-         <lastmod>2021-11-21</lastmod>
+         <lastmod>2021-11-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://guide.disnake.dev/200-interactions/203-buttons/</loc>
-         <lastmod>2021-11-21</lastmod>
+         <lastmod>2021-11-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://guide.disnake.dev/200-interactions/204-select-menus/</loc>
-         <lastmod>2021-11-21</lastmod>
+         <lastmod>2021-11-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://guide.disnake.dev/200-interactions/205-context-menus/</loc>
-         <lastmod>2021-11-21</lastmod>
+         <lastmod>2021-11-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://guide.disnake.dev/300-popular-topics/301-good-practices/</loc>
-         <lastmod>2021-11-21</lastmod>
+         <lastmod>2021-11-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://guide.disnake.dev/300-popular-topics/302-prefix-commands/</loc>
-         <lastmod>2021-11-21</lastmod>
+         <lastmod>2021-11-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>
