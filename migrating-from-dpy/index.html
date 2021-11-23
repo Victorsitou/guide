@@ -325,23 +325,44 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#differences" class="md-nav__link">
-    Differences
+  <a href="#differences-between-libraries" class="md-nav__link">
+    Differences between libraries
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#rewrite" class="md-nav__link">
-    Rewrite
+  <a href="#changing-requirements" class="md-nav__link">
+    Changing requirements
   </a>
   
-    <nav class="md-nav" aria-label="Rewrite">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rewriting-your-bot" class="md-nav__link">
+    Rewriting your bot
+  </a>
+  
+    <nav class="md-nav" aria-label="Rewriting your bot">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#requirements" class="md-nav__link">
-    Requirements
+  <a href="#replace-discord-with-disnake" class="md-nav__link">
+    Replace discord with disnake
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import-disnake-as-discord" class="md-nav__link">
+    Import disnake as discord
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#using-the-discord-shim" class="md-nav__link">
+    Using the discord shim
   </a>
   
 </li>
@@ -713,15 +734,24 @@
                 
                 
                 <h1 id="migrating-from-discordpy">Migrating from discord.py<a class="headerlink" href="#migrating-from-discordpy" title="Permanent link">&para;</a></h1>
-<p>In this guide we will try to explain the differences between discord.py and disnake, and ways to rewrite your code to disnake.</p>
-<h2 id="differences">Differences<a class="headerlink" href="#differences" title="Permanent link">&para;</a></h2>
-<p>As you probably know, discord.py has been discontinued, and because of that, disnake developers and contributors committed to keep the Discord API wrapper for Python alive.</p>
-<p>discord.py 2.0 had major changes, and that's why if you are not using that version, we recommend you to read <a href="https://gist.github.com/apple502j/f75b4f24652f04de85c7084ffd73ec58" rel="noopener" target="_blank">this page</a> which collected all the major changes that version had.</p>
-<h2 id="rewrite">Rewrite<a class="headerlink" href="#rewrite" title="Permanent link">&para;</a></h2>
-<p>If you want to rewrite your code from discord.py to disnake, this will require some not so difficult changes.</p>
-<p>Here are three ways to rewrite your code.</p>
-<h3 id="requirements">Requirements<a class="headerlink" href="#requirements" title="Permanent link">&para;</a></h3>
-<p>Before we start, you must uninstall <code>discord</code> library, you can do it with the following command:</p>
+<p>After the discontinuation of <code>discord.py</code> (refer <a href="https://gist.github.com/Rapptz/4a2f62751b9600a31a0d3c78100287f1" rel="noopener" target="_blank">this gist</a>), many forks of the API wrapper branched onward to modify the library, in order to keep it updated with the latest features and Discord API changes - <code>disnake</code> is one such fork. </p>
+<p>Thus, if you've chosen <code>disnake</code> as your fork of choice in order to implement interactions/components and other features, this page will help you understand the changes in syntax, and aim for making your migrating process as smooth as possible.</p>
+<h2 id="differences-between-libraries">Differences between libraries<a class="headerlink" href="#differences-between-libraries" title="Permanent link">&para;</a></h2>
+<p><code>disnake</code> is based on <code>discord.py 2.0</code>, which had major syntax changes from its previous version. Therefore, if you're shifting to <code>disnake</code> from a version of <code>discord.py</code> lower than 2.0, you will have to make some important syntax changes in your code. You can refer <a href="https://gist.github.com/apple502j/f75b4f24652f04de85c7084ffd73ec58" rel="noopener" target="_blank">this page</a> for the full list of breaking changes in <code>discord.py 2.0</code>, though we will list some primary API reference changes here:</p>
+<ul>
+<li>Methods and attributes that returned <code>TextChannel</code>, etc can now return <code>Thread</code>.</li>
+<li>Attributes that returned <code>Asset</code> are renamed, e.g. attributes ending with <code>_url</code> (i.e. <code>avatar_url</code>) are changed to <code>avatar.url</code>. <code>User.avatar</code> returns <code>None</code> in case the default avatar is used.</li>
+<li><code>on_presence_update</code> replaces <code>on_member_update</code> for updates to <code>Member.status</code> and <code>Member.activities</code>.</li>
+<li>Webhooks are changed significantly: <code>WebhookAdapter</code> is removed, and synchronous requests using <code>requests</code> is now inside <code>SyncWebhook</code>.</li>
+<li><code>edit</code> method no longer updates cache and instead returns modified instance.</li>
+<li><code>Client.logout</code> is removed; use <code>Client.close</code> instead.</li>
+<li><code>Message.type</code> for replies are now <code>MessageType.reply</code>.</li>
+<li><code>Reaction.custom_emoji</code> property is changed to <code>Reaction.is_custom_emoji</code> method.</li>
+<li><code>missing_perms</code> attributes and arguments are renamed to <code>missing_permissions</code>.</li>
+<li>Many arguments are now specified as positional-only or keyword-only; e.g. <code>oauth_url</code> now takes keyword-only arguments, and methods starting with <code>get_</code> or <code>fetch_</code> take positional-only arguments.</li>
+</ul>
+<h2 id="changing-requirements">Changing requirements<a class="headerlink" href="#changing-requirements" title="Permanent link">&para;</a></h2>
+<p>In order to avoid conflicts between the libraries, you must uninstall <code>discord.py</code>. You can do so by using the following command in your terminal:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Windows</label><label for="__tabbed_1_2">macOS</label><label for="__tabbed_1_3">Linux</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -738,50 +768,27 @@
 </div>
 </div>
 </div>
-<p><sup>We do this to prevent conflicts with the <code>disnake</code> library.</sup></p>
-<p>Also don't forget to install disnake, you can follow <a href="../000-prerequisites/001-installing-python/#installing-disnake">this guide</a> to install it.</p>
-<p>Once you have those two requirements ready, let's continue with the three ways to rewrite your code from discord.py to disnake:</p>
+<p>To install <code>disnake</code>, you can follow the instructions on <a href="../000-prerequisites/001-installing-python/#installing-disnake">this page</a>.</p>
+<h2 id="rewriting-your-bot">Rewriting your bot<a class="headerlink" href="#rewriting-your-bot" title="Permanent link">&para;</a></h2>
+<p>As discussed above, rewriting your code from an older <code>discord.py</code> version to <code>disnake</code> will require some major syntax changes. But if you're migrating from <code>discord.py 2.0</code>, all that's left now is changing the library references throughout the code, since the base code for both the libraries is practically the same. </p>
+<p>There are three ways to switch between libraries:</p>
+<h4 id="replace-discord-with-disnake">Replace <code>discord</code> with <code>disnake</code><a class="headerlink" href="#replace-discord-with-disnake" title="Permanent link">&para;</a></h4>
 <ol>
-<li>
-<p>Replace every <code>discord</code> to <code>disnake</code>:</p>
-<ul>
-<li>
-<p>First of all, import disnake into your code:</p>
+<li>Import <code>disnake</code> into your code (and delete the lines where you import <code>discord</code>.).</li>
+</ol>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">disnake</span>
 <span class="kn">from</span> <span class="nn">disnake.ext</span> <span class="kn">import</span> <span class="n">commands</span>
 </code></pre></div>
-<p>Don't forget to delete the lines where you import <code>discord</code>.</p>
-</li>
-<li>
-<p>Then with your favorite editor, replace every <code>discord</code> you have in your code with <code>disnake</code>.</p>
-<div class="admonition info">
-<p class="admonition-title">Note</p>
-<p>Please, if you have problems with your code after doing this way, try to read <a href="https://gist.github.com/apple502j/f75b4f24652f04de85c7084ffd73ec58" rel="noopener" target="_blank">this page</a> which has a list of major changes or ask us on our <a href="https://discord.gg/gJDbCw8aQy" rel="noopener" target="_blank">Discord server</a>.</p>
-</div>
-</li>
-</ul>
-</li>
-<li>
-<p>Import disnake as discord:</p>
-<ul>
-<li>
-<p>Import disnake as discord into your code:</p>
+<ol>
+<li>With your favorite editor, replace every <code>discord</code> reference in your code with <code>disnake</code>.</li>
+</ol>
+<h4 id="import-disnake-as-discord">Import <code>disnake as discord</code><a class="headerlink" href="#import-disnake-as-discord" title="Permanent link">&para;</a></h4>
+<p>Import <code>disnake as discord</code> into your code (and delete the lines where you import <code>discord</code>). This reduces the effort of changing all references throughout your code.</p>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">disnake</span> <span class="k">as</span> <span class="nn">discord</span>
 <span class="kn">from</span> <span class="nn">disnake.ext</span> <span class="kn">import</span> <span class="n">commands</span>
 </code></pre></div>
-<p>Don't forget to delete the lines where you import <code>discord</code>.</p>
-<div class="admonition info">
-<p class="admonition-title">Note</p>
-<p>Please, if you have problems with your code after doing this way, try to read <a href="https://gist.github.com/apple502j/f75b4f24652f04de85c7084ffd73ec58" rel="noopener" target="_blank">this page</a> which has a list of major changes or ask us on our <a href="https://discord.gg/gJDbCw8aQy" rel="noopener" target="_blank">Discord server</a>.</p>
-</div>
-</li>
-</ul>
-</li>
-<li>
-<p>Use discord shim:</p>
-<ul>
-<li>
-<p>First of all, you must install the discord shim, you can do it with the following command:</p>
+<h4 id="using-the-discord-shim">Using the <code>discord</code> shim<a class="headerlink" href="#using-the-discord-shim" title="Permanent link">&para;</a></h4>
+<p>Using the <code>discord</code> shim allows you to use <code>disnake</code>, without the need to import it directly or importing it as discord - thus eliminating the need to change your code at all. To install the shim, you can use the following command in your terminal:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:3"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Windows</label><label for="__tabbed_2_2">macOS</label><label for="__tabbed_2_3">Linux</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -798,22 +805,11 @@
 </div>
 </div>
 </div>
-</li>
-<li>
-<p>Then, import the discord shim:</p>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">discord</span>
-<span class="kn">from</span> <span class="nn">discord.ext</span> <span class="kn">import</span> <span class="n">commands</span>
-</code></pre></div>
-<p>The discord shim allows us to use <code>disnake</code> without the need to import it directly, nor import it as <code>discord</code>.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>We don't recommend using the shim, please prefer to use one of the two ways already mentioned.</p>
+<p>We don't recommend using the shim, as it is updated less frequently and may break the behaviour of interactions/components in some cases. If possible, proceed with one of the other two procedures mentioned.</p>
 </div>
-</li>
-</ul>
-</li>
-</ol>
-<p>And that's it! Since disnake is a fork of discord.py, it has a lot of similarities, but we recommend you to always run your code to fix possible bugs.</p>
+<p>And that's it! Since <code>disnake</code> is a fork of <code>discord.py</code>, it inherits a lot of similarities - though we recommend you to always run your code to fix any possible issues.</p>
                 
                   
                     
@@ -822,7 +818,7 @@
 <div class="md-source-date">
   <small>
     
-      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">November 12, 2021</span>
+      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">November 23, 2021</span>
       
     
   </small>
